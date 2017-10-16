@@ -46,7 +46,7 @@ RUN apt-get update \
         libogre-1.9-dev \
         python-jinja2 \
         python-empy \
-        python-pip
+        python-pip \
         && pip install catkin_pkg
 
 COPY ninja /usr/bin/ninja        
@@ -58,6 +58,6 @@ RUN tar -xf /tmp/gazebo-7.1.0.tar.bz2 -C /tmp \
         && make -j4 \
         && make install \
         && echo '/usr/local/lib' | tee /etc/ld.so.conf.d/gazebo.conf \
-        && ldconfig
-        && mkdir /.gazebo
+        && ldconfig \
+        && mkdir /.gazebo \
         && chmod -R a+rwx /.gazebo
