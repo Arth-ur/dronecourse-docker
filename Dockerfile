@@ -1,11 +1,11 @@
 FROM ubuntu:xenial-20171006
 
 RUN apt-get update \
-		&& apt-get install -y wget \
+		&& apt-get install --no-install-recommends -y wget \
         && echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable xenial main" > /etc/apt/sources.list.d/gazebo-stable.list \
         && wget http://packages.osrfoundation.org/gazebo.key -O - | apt-key add - \
         && apt-get update \
-        && apt-get install -y lbzip2 \
+        && apt-get install --no-install-recommends -y lbzip2 \
         build-essential \
         git \
         unzip \
@@ -47,7 +47,9 @@ RUN apt-get update \
         python-jinja2 \
         python-empy \
         python-pip \
-        && pip install catkin_pkg
+        && pip install catkin_pkg \
+        && apt-get -y remove wget python-pip \
+        && rm -rf /var/lib/apt/lists/*
 
 COPY ninja /usr/bin/ninja        
 COPY gazebo-7.1.0.tar.bz2 /tmp
@@ -61,3 +63,4 @@ RUN tar -xf /tmp/gazebo-7.1.0.tar.bz2 -C /tmp \
         && ldconfig \
         && mkdir /.gazebo \
         && chmod -R a+rwx /.gazebo
+
