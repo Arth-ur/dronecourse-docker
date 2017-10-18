@@ -8,5 +8,5 @@ RUN apt-get update \
     && apt-get remove -y wget unzip \
     && rm -rf /var/lib/apt/lists/*
 RUN apt-get update \
-    && apt-get install --no-install-recommands -y xsltproc \
+    && apt-get install --no-install-recommends -y xsltproc \
     && rm -rf /var/lib/apt/lists/*
